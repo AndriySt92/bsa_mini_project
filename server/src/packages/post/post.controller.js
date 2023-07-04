@@ -37,6 +37,11 @@ class PostController extends Controller {
       url: PostsApiPath.REACT,
       [ControllerHook.HANDLER]: this.react
     });
+    this.addRoute({
+      method: HttpMethod.DELETE,
+      url: PostsApiPath.$ID,
+      [ControllerHook.HANDLER]: this.delete
+    });
   }
 
   getOnes = request => this.#postService.getPosts(request.query);
@@ -66,6 +71,21 @@ class PostController extends Controller {
         .emit(NotificationSocketEvent.LIKE_POST);
     }
     return reaction;
+  };
+
+  delete = async (request, reply) => {
+    try {
+      const response = await this.#postService.deletePost(
+        request.params.id,
+        request.user.id
+      );
+
+      return response
+        ? reply.status(HttpCode.OK).send(request.params.id)
+        : reply.status(HttpCode.NOT_FOUND);
+    } catch (e) {
+      return reply.status(HttpCode.FORBIDDEN).send(e.message);
+    }
   };
 }
 

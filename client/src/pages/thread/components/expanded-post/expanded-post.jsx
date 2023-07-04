@@ -11,8 +11,9 @@ import { getSortedComments } from './libs/helpers/helpers.js';
 
 const ExpandedPost = ({ onSharePost }) => {
   const dispatch = useDispatch();
-  const { post } = useSelector(state => ({
-    post: state.posts.expandedPost
+  const { post, userId } = useSelector(state => ({
+    post: state.posts.expandedPost,
+    userId: state.profile.user.id
   }));
 
   const handlePostLike = useCallback(
@@ -37,15 +38,22 @@ const ExpandedPost = ({ onSharePost }) => {
 
   const sortedComments = getSortedComments(post.comments ?? []);
 
+  const handleDeletePost = useCallback(
+    id => dispatch(threadActionCreator.deletePost(id)),
+    [dispatch]
+  );
+
   return (
     <Modal isOpen onClose={handleExpandedPostClose}>
       {post ? (
         <>
           <Post
             post={post}
+            userId={userId}
             onPostLike={handlePostLike}
             onExpandedPostToggle={handleExpandedPostToggle}
             onSharePost={onSharePost}
+            onDeletePost={handleDeletePost}
           />
           <div>
             <h3>Comments</h3>

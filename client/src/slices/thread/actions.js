@@ -122,6 +122,14 @@ const addComment = createAsyncThunk(
   }
 );
 
+const deletePost = createAsyncThunk(
+  ActionType.DELETE_POST,
+  async (id, { extra: { services } }) => {
+    const postId = await services.post.deletePost(id);
+    return postId;
+  }
+);
+
 export {
   addComment,
   applyPost,
@@ -129,5 +137,6 @@ export {
   likePost,
   loadMorePosts,
   loadPosts,
-  toggleExpandedPost
+  toggleExpandedPost,
+  deletePost
 };

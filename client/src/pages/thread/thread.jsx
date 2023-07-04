@@ -97,6 +97,12 @@ const Thread = () => {
 
   const handleCloseSharedPostLink = useCallback(() => setSharedPostId(), []);
 
+  const handleDeletePost = useCallback(
+    id => dispatch(threadActionCreator.deletePost(id)),
+    [dispatch]
+  );
+
+
   return (
     <div className={styles.threadContent}>
       <div className={styles.addPostForm}>
@@ -122,9 +128,11 @@ const Thread = () => {
           {posts.map(post => (
             <Post
               post={post}
+              userId={userId}
               onPostLike={handlePostLike}
               onExpandedPostToggle={handleExpandedPostToggle}
               onSharePost={handleSharePost}
+              onDeletePost={handleDeletePost}
               key={post.id}
             />
           ))}

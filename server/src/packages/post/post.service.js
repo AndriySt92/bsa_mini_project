@@ -41,6 +41,17 @@ class PostService {
       ? {}
       : this._postReactionRepository.getPostReaction(userId, postId);
   }
+
+  async deletePost(postId, userId) {
+    const post = await this._postRepository.getById(postId);
+
+    if (post.userId !== userId) {
+      throw new Error("You cannot delete other people's posts!");
+    }
+
+    const deletedPost = await this._postRepository.deleteById(postId);
+    return deletedPost ? true : false;
+  }
 }
 
 export { PostService };
