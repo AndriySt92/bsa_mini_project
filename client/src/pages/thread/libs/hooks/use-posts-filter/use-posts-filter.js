@@ -4,13 +4,22 @@ import { useCallback, useReducer } from 'react';
 import { PostsFilterAction } from '~/libs/enums/enums.js';
 
 const postsFilterInitialState = {
-  userId: undefined
+  userId: undefined,
+  isLike: undefined,
 };
 
 const postsFilterReducer = createReducer(postsFilterInitialState, builder => {
   builder.addCase(PostsFilterAction.TOGGLE_SHOW_OWN_POSTS, (state, action) => {
     state.userId = action.payload.userId;
+    state.isLike = action.payload.isLike;
   });
+  builder.addCase(
+    PostsFilterAction.TOGGLE_SHOW_POSTS_IS_LIKED_BY_ME,
+    (state, action) => {
+      state.userId = action.payload.userId;
+      state.isLike = action.payload.isLike;
+    }
+  );
 });
 
 const usePostsFilter = () => {
@@ -23,12 +32,23 @@ const usePostsFilter = () => {
     dispatchPostsFilter({
       type: PostsFilterAction.TOGGLE_SHOW_OWN_POSTS,
       payload: {
-        userId
+        userId,
+        isLike: undefined
       }
     });
   }, []);
 
-  return { postsFilter, handleShownOwnPosts };
+  const handleShowPostsIsLikedByMe = useCallback(userId => {
+    dispatchPostsFilter({
+      type: PostsFilterAction.TOGGLE_SHOW_POSTS_IS_LIKED_BY_ME,
+      payload: {
+        userId,
+        isLike: true
+      }
+    });
+  }, []);
+
+  return { postsFilter, handleShownOwnPosts, handleShowPostsIsLikedByMe };
 };
 
 export { usePostsFilter };
