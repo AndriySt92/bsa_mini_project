@@ -62,7 +62,10 @@ const Post = ({ post, onPostLike, onDeletePost, userId, onPostDislike, onExpande
           onClick={handleSharePost}
         />
         {user.id === userId && (
+          <>
           <IconButton iconName={IconName.DELETE} onClick={handleDeletePost} />
+          <IconButton iconName={IconName.EDIT} onClick={()=> {}} />
+          </>
         )}
       </div>
     </div>

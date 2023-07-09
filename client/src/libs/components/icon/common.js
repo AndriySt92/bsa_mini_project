@@ -12,7 +12,8 @@ import {
   faThumbsUp,
   faUser,
   faUserCircle,
-  faTrash
+  faTrash,
+  faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 import { IconName } from '~/libs/enums/enums.js';
@@ -31,7 +32,9 @@ const iconNameToSvgIcon = {
   [IconName.THUMBS_DOWN]: faThumbsDown,
   [IconName.USER]: faUser,
   [IconName.USER_CIRCLE]: faUserCircle,
-  [IconName.DELETE]: faTrash
+  [IconName.DELETE]: faTrash,
+  [IconName.EDIT]: faPenToSquare,
+  
 };
 
 export { iconNameToSvgIcon };
