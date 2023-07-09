@@ -10,7 +10,7 @@ import { IconButton } from '../icon-button/icon-button.jsx';
 import { Image } from '../image/image.jsx';
 import styles from './styles.module.scss';
 
-const Post = ({ post, onPostLike, onExpandedPostToggle, onSharePost }) => {
+const Post = ({ post, onPostLike, onPostDislike, onExpandedPostToggle, onSharePost }) => {
   const {
     id,
     image,
@@ -22,8 +22,9 @@ const Post = ({ post, onPostLike, onExpandedPostToggle, onSharePost }) => {
     createdAt
   } = post;
   const date = getFromNowTime(createdAt);
-
+  
   const handlePostLike = useCallback(() => onPostLike(id), [id, onPostLike]);
+  const handlePostDislike = useCallback(() => onPostDislike(id), [id, onPostDislike]);
   const handleExpandedPostToggle = useCallback(
     () => onExpandedPostToggle(id),
     [id, onExpandedPostToggle]
@@ -48,7 +49,7 @@ const Post = ({ post, onPostLike, onExpandedPostToggle, onSharePost }) => {
         <IconButton
           iconName={IconName.THUMBS_DOWN}
           label={dislikeCount}
-          onClick={() => {}}
+          onClick={handlePostDislike}
         />
         <IconButton
           iconName={IconName.COMMENT}
