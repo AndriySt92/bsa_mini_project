@@ -46,7 +46,7 @@ const Thread = () => {
   });
 
   const showOwnPosts = watch(ThreadToolbarKey.SHOW_OWN_POSTS);
-  const showPostsIsLikedByMe = watch(ThreadToolbarKey.SHOW_POSTS_IS_LIKED_BY_ME);
+  const showPostsIsLikedByMe = watch(ThreadToolbarKey.SHOW_LIKED_BY_OWN_POSTS );
   
   const handlePostsLoad = useCallback(
     filtersPayload => {
@@ -132,7 +132,7 @@ const Thread = () => {
             label="Show only my posts"
           />
             <Checkbox
-            name={ThreadToolbarKey.SHOW_POSTS_IS_LIKED_BY_ME}
+            name={ThreadToolbarKey.SHOW_LIKED_BY_OWN_POSTS}
             control={control}
             label="Show posts which I liked"
           />
