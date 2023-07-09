@@ -16,6 +16,7 @@ const allActions = {
   loadMorePosts,
   applyPost,
   createPost,
+  deletePost,
   toggleExpandedPost,
   reactPost,
   addComment
