@@ -12,9 +12,9 @@ class PostRepository extends AbstractRepository {
   }
 
   getPosts(filter) {
-    const { from: offset, count: limit, userId, isLike } = filter;
+    const { from: offset, count: limit, userId, likedByOwn } = filter;
 
-    if (isLike) {
+    if (likedByOwn) {
       return this.model
         .query()
         .select(

@@ -5,19 +5,19 @@ import { PostsFilterAction } from '~/libs/enums/enums.js';
 
 const postsFilterInitialState = {
   userId: undefined,
-  isLike: undefined,
+  likedByOwn: undefined,
 };
 
 const postsFilterReducer = createReducer(postsFilterInitialState, builder => {
   builder.addCase(PostsFilterAction.TOGGLE_SHOW_OWN_POSTS, (state, action) => {
     state.userId = action.payload.userId;
-    state.isLike = action.payload.isLike;
+    state.likedByOwn = action.payload.likedByOwn;
   });
   builder.addCase(
-    PostsFilterAction.TOGGLE_SHOW_POSTS_IS_LIKED_BY_ME,
+    PostsFilterAction.TOGGLE_SHOW_LIKED_BY_OWN_POSTS ,
     (state, action) => {
       state.userId = action.payload.userId;
-      state.isLike = action.payload.isLike;
+      state.likedByOwn = action.payload.likedByOwn;
     }
   );
 });
@@ -33,17 +33,17 @@ const usePostsFilter = () => {
       type: PostsFilterAction.TOGGLE_SHOW_OWN_POSTS,
       payload: {
         userId,
-        isLike: undefined
+        likedByOwn: undefined
       }
     });
   }, []);
 
   const handleShowPostsIsLikedByMe = useCallback(userId => {
     dispatchPostsFilter({
-      type: PostsFilterAction.TOGGLE_SHOW_POSTS_IS_LIKED_BY_ME,
+      type: PostsFilterAction.TOGGLE_SHOW_LIKED_BY_OWN_POSTS ,
       payload: {
         userId,
-        isLike: true
+        likedByOwn: true
       }
     });
   }, []);
