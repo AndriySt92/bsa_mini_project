@@ -10,11 +10,7 @@ import { IconButton } from '../icon-button/icon-button.jsx';
 import { Image } from '../image/image.jsx';
 import styles from './styles.module.scss';
 
-<<<<<<< HEAD
-const Post = ({ post, userId, onPostLike, onDeletePost, onExpandedPostToggle, onSharePost }) => {
-=======
-const Post = ({ post, onPostLike, onPostDislike, onExpandedPostToggle, onSharePost }) => {
->>>>>>> task/thjs-28-Add-dislike-post-flow
+const Post = ({ post, onPostLike, onDeletePost, userId, onPostDislike, onExpandedPostToggle, onSharePost }) => {
   const {
     id,
     image,
