@@ -17,7 +17,12 @@ const ExpandedPost = ({ onSharePost }) => {
   }));
 
   const handlePostLike = useCallback(
-    id => dispatch(threadActionCreator.likePost(id)),
+    id => dispatch(threadActionCreator.reactPost({id, isLike:true})),
+    [dispatch]
+  );
+
+  const handlePostDislike = useCallback(
+    id => dispatch(threadActionCreator.reactPost({id, isLike:false})),
     [dispatch]
   );
 
@@ -51,6 +56,7 @@ const ExpandedPost = ({ onSharePost }) => {
             post={post}
             userId={userId}
             onPostLike={handlePostLike}
+            onPostDislike={handlePostDislike}
             onExpandedPostToggle={handleExpandedPostToggle}
             onSharePost={onSharePost}
             onDeletePost={handleDeletePost}

@@ -2,7 +2,7 @@ import {
   addComment,
   applyPost,
   createPost,
-  likePost,
+  reactPost,
   loadMorePosts,
   loadPosts,
   toggleExpandedPost,
@@ -17,9 +17,8 @@ const allActions = {
   applyPost,
   createPost,
   toggleExpandedPost,
-  likePost,
-  addComment,
-  deletePost
+  reactPost,
+  addComment
 };
 
 export { allActions as actions };

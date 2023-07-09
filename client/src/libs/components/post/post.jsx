@@ -10,7 +10,11 @@ import { IconButton } from '../icon-button/icon-button.jsx';
 import { Image } from '../image/image.jsx';
 import styles from './styles.module.scss';
 
+<<<<<<< HEAD
 const Post = ({ post, userId, onPostLike, onDeletePost, onExpandedPostToggle, onSharePost }) => {
+=======
+const Post = ({ post, onPostLike, onPostDislike, onExpandedPostToggle, onSharePost }) => {
+>>>>>>> task/thjs-28-Add-dislike-post-flow
   const {
     id,
     image,
@@ -22,8 +26,9 @@ const Post = ({ post, userId, onPostLike, onDeletePost, onExpandedPostToggle, on
     createdAt
   } = post;
   const date = getFromNowTime(createdAt);
-
+  
   const handlePostLike = useCallback(() => onPostLike(id), [id, onPostLike]);
+  const handlePostDislike = useCallback(() => onPostDislike(id), [id, onPostDislike]);
   const handleExpandedPostToggle = useCallback(
     () => onExpandedPostToggle(id),
     [id, onExpandedPostToggle]
@@ -49,7 +54,7 @@ const Post = ({ post, userId, onPostLike, onDeletePost, onExpandedPostToggle, on
         <IconButton
           iconName={IconName.THUMBS_DOWN}
           label={dislikeCount}
-          onClick={() => {}}
+          onClick={handlePostDislike}
         />
         <IconButton
           iconName={IconName.COMMENT}
