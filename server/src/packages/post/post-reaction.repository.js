@@ -14,6 +14,13 @@ class PostReactionRepository extends AbstractRepository {
       .withGraphFetched('[post]')
       .first();
   }
-}
 
+  getPostReactionsById(postId) {
+    return this.model
+      .query()
+      .select()
+      .where({ postId })
+      .withGraphFetched('[post]');
+  }
+}
 export { PostReactionRepository };
