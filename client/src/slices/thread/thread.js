@@ -6,7 +6,8 @@ import {
   loadMorePosts,
   loadPosts,
   toggleExpandedPost,
-  deletePost
+  deletePost,
+  updatePost
 } from './actions.js';
 import { actions } from './thread.slice.js';
 
@@ -19,7 +20,8 @@ const allActions = {
   deletePost,
   toggleExpandedPost,
   reactPost,
-  addComment
+  addComment,
+  updatePost
 };
 
 export { allActions as actions };

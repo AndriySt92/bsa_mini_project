@@ -5,7 +5,8 @@ const ActionType = {
   SET_EXPANDED_POST: 'thread/set-expanded-post',
   REACT: 'thread/react',
   COMMENT: 'thread/comment',
-  DELETE_POST: 'thread/delete-post'
+  DELETE_POST: 'thread/delete-post',
+  UPDATE_POST: 'thread/update-post'
 };
 
 export { ActionType };

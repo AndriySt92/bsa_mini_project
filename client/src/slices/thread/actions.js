@@ -70,27 +70,49 @@ const toggleExpandedPost = createAsyncThunk(
   }
 );
 
+const replaceUpdatedPost = (postId, updates, getState) => {
+  const mapUpdatedPost = post => ({
+    ...post,
+    ...updates
+  });
+
+  const {
+    posts: { posts, expandedPost }
+  } = getState();
+  const updated = posts.map(post =>{
+   
+    if(post.id === postId){
+      return mapUpdatedPost(post)
+    }
+    return post
+  }
+  );
+ 
+  const updatedExpandedPost =
+    expandedPost?.id === postId ? mapDislikes(expandedPost) : undefined;
+  
+  return { posts: updated, expandedPost: updatedExpandedPost };
+}
+
 const reactPost = createAsyncThunk(
   ActionType.REACT,
-  async ({postId, isLike}, { getState, extra: { services } }) => {
-    const { likeCount, dislikeCount } = await services.post.reactPost({postId, isLike});
- 
-    const mapDislikes = post => ({
-      ...post,
-      likeCount: Number(likeCount),
-      dislikeCount: Number(dislikeCount)
+  async ({ postId, isLike }, { getState, extra: { services } }) => {
+    const { likeCount, dislikeCount } = await services.post.reactPost({
+      postId,
+      isLike
     });
 
-    const {
-      posts: { posts, expandedPost }
-    } = getState();
-    const updated = posts.map(post =>
-      post.id === postId ? mapDislikes(post) : post
-    );
-    const updatedExpandedPost =
-      expandedPost?.id === postId ? mapDislikes(expandedPost) : undefined;
+    return replaceUpdatedPost(postId, {dislikeCount, likeCount}, getState)
+  }
+);
 
-    return { posts: updated, expandedPost: updatedExpandedPost };
+const updatePost = createAsyncThunk(
+  ActionType.UPDATE_POST,
+  async (post, {getState, extra: { services } }) => {
+    const { id } = await services.post.updatePost(post);
+    const updatedPost = await services.post.getPost(id);
+
+    return replaceUpdatedPost(post.id, updatedPost, getState)
   }
 );
 
@@ -138,5 +160,6 @@ export {
   loadMorePosts,
   loadPosts,
   toggleExpandedPost,
-  deletePost
+  deletePost,
+  updatePost
 };
