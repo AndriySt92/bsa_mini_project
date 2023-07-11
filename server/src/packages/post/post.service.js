@@ -55,6 +55,17 @@ class PostService {
     const deletedPost = await this._postRepository.deleteById(postId);
     return deletedPost ? true : false;
   }
+
+  async updatePost(userId, post) {
+    const postById = await this._postRepository.getById(post.id);
+   
+    if (postById && postById?.userId !== userId) {
+      throw new Error("You cannot update other people's posts!");
+    }
+
+    const updatedPost = await this._postRepository.updateById(post.id, {body: post.body, imageId: post.imageId});
+    return updatedPost
+  }
 }
 
 export { PostService };

@@ -42,6 +42,11 @@ class PostController extends Controller {
       url: PostsApiPath.$ID,
       [ControllerHook.HANDLER]: this.delete
     });
+    this.addRoute({
+      method: HttpMethod.PUT,
+      url: PostsApiPath.$ID,
+      [ControllerHook.HANDLER]: this.update
+    });
   }
 
   getOnes = request => this.#postService.getPosts(request.query);
@@ -87,6 +92,18 @@ class PostController extends Controller {
         : reply.status(HttpCode.NOT_FOUND);
     } catch (e) {
       return reply.status(HttpCode.FORBIDDEN).send(e.message);
+    }
+  };
+  update = async (request, reply) => {
+    try {
+      const response = await this.#postService.updatePost(
+        request.body.userId,
+        request.body
+      );
+  
+      return response ? response : reply.status(HttpCode.NOT_FOUND);
+    } catch (error) {
+      return reply.status(HttpCode.FORBIDDEN).send(error.message);
     }
   };
 }
