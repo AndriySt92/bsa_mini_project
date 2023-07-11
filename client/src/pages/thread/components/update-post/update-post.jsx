@@ -19,7 +19,7 @@ const UpdatePost = ({  onUpdatePost,
   }) => {
   const [image, setImage] = useState();
   const [isUploading, setIsUploading] = useState(false);
-  const [errorUploadingImage, setErrorUploadingImage] = useState("adawdawd")
+  const [errorUploadingImage, setErrorUploadingImage] = useState("")
   const { body } = post 
   const { control, handleSubmit, reset } = useAppForm({
     defaultValues: { body }
