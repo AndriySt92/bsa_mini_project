@@ -118,6 +118,10 @@ const Thread = () => {
     [dispatch]
   );
 
+  const handleUpdatePost = useCallback(
+    post => dispatch(threadActionCreator.updatePost(post)),
+    [dispatch]
+  );
 
   return (
     <div className={styles.threadContent}>
@@ -155,6 +159,8 @@ const Thread = () => {
               onExpandedPostToggle={handleExpandedPostToggle}
               onSharePost={handleSharePost}
               onDeletePost={handleDeletePost}
+              onUploadImage={handleUploadImage}
+              onUpdatePost={handleUpdatePost}
               key={post.id}
             />
           ))}

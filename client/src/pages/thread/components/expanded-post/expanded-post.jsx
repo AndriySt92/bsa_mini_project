@@ -48,6 +48,13 @@ const ExpandedPost = ({ onSharePost }) => {
     [dispatch]
   );
 
+  const handleUploadImage = file => imageService.uploadImage(file);
+
+  const handleUpdatePost = useCallback(
+    post => dispatch(threadActionCreator.updatePost(post)),
+    [dispatch]
+  );
+
   return (
     <Modal isOpen onClose={handleExpandedPostClose}>
       {post ? (
@@ -60,6 +67,8 @@ const ExpandedPost = ({ onSharePost }) => {
             onExpandedPostToggle={handleExpandedPostToggle}
             onSharePost={onSharePost}
             onDeletePost={handleDeletePost}
+            onUploadImage={handleUploadImage}
+            onUpdatePost={handleUpdatePost}
           />
           <div>
             <h3>Comments</h3>
